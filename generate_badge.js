@@ -1,5 +1,5 @@
 var page = require('webpage').create();
-page.open('http://localhost:5000/badge/Some random motherfucker/Participant/', function() {
-  page.render('iot-weekend-countdown.png');
+page.open('http://localhost:5000/badge/First Last/Participant/', function() {
+  page.render('badge.png');
   phantom.exit();
 });
