@@ -4,4 +4,9 @@
 
 {% block content %}
 This is the event printer. It's meant to be used as an API over /badge.
+
+<form action="http://192.168.130.30:5000/scan" method="get">
+    <input name="id">
+    <input type="submit">
+</form>
 {% endblock %}	
