@@ -1,5 +1,8 @@
 var page = require('webpage').create();
-page.open('http://localhost:5000/badge/First Last/Participant/', function() {
+var system = require('system');
+var address = "http://localhost:5000/print?id=" + system.args[1];
+console.log(address)
+page.open(address, function() {
   page.render('badge.png');
   phantom.exit();
 });

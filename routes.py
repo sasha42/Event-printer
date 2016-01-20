@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 import pyexcel as pe
+import subprocess
  
 app = Flask(__name__)
 sheet = pe.get_sheet(file_name="orders.csv", name_rows_by_column=0)
@@ -20,8 +21,18 @@ def scan():
 	order = sheet.row[sanitized_id]
 	if order[4] == "Hackathon admission":
 		order[4] = "Hackathon participant"
+	subprocess.call(["/event-printer/phantomjs", "/event-printer/generate_badge.js", "483915543"])
+	return render_template('badge.html', name=order[0]+" "+order[1], skills=order[4])
+
+@app.route('/print')
+def prtinty():
+	orderid = request.args.get('id')
+	sanitized_id = orderid[:9]
+	order = sheet.row[sanitized_id]
+	if order[4] == "Hackathon admission":
+		order[4] = "Hackathon participant"
 	return render_template('badge.html', name=order[0]+" "+order[1], skills=order[4])
 
 if __name__ == '__main__':
   #app.run(debug=True)
-  app.run(host='0.0.0.0')
+  app.run(debug=True, threaded=True, host='0.0.0.0')
