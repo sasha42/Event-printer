@@ -1,0 +1,13 @@
+{% block scanner %}
+
+<div class="container">
+	<img src="{{ url_for('static', filename='img/logo-dark.png') }}">
+</div>
+
+<p>This is the event printer. It scans bar codes and prints participant badges.</p>
+
+<form action="{{url}}scan" method="post">
+    <input name="id" placeholder=" Order #" autofocus autocomplete="off" spellcheck="false"> 
+    <input type="submit" onclick="this.value='Printing...'">
+</form>
+{% endblock %}
